@@ -14,13 +14,17 @@ public class SpawnObjects : MonoBehaviour
     private void EvaluatePosition(GameObject ball, int xIndex, int yIndex, int zIndex)
     {
         Transform floorTransform = floor.transform;
-        float ballGridHeightOffset = floorTransform.localScale.y / 2 + ballGridGroundOffset;
+        // float ballGridHeightOffset = floorTransform.localScale.y / 2 + ballGridGroundOffset;
 
         Vector3 ballPosition = new Vector3
         {
-            x = Mathf.Lerp(floorTransform.localScale.x * -1, floorTransform.localScale.x, xIndex / (float)(ballCount - 1)) / 2,
-            y = Mathf.Lerp(ballGridHeightOffset, ballGridMaxHeight, yIndex / (float)(ballCount - 1)),
-            z = Mathf.Lerp(floorTransform.localScale.z * -1, floorTransform.localScale.z, zIndex / (float)(ballCount - 1)) / 2
+            //x = Mathf.Lerp(floorTransform.localScale.x * -1, floorTransform.localScale.x, xIndex / (float)(ballCount - 1)) / 2,
+            //y = Mathf.Lerp(ballGridHeightOffset, ballGridMaxHeight, yIndex / (float)(ballCount - 1)),
+            //z = Mathf.Lerp(floorTransform.localScale.z * -1, floorTransform.localScale.z, zIndex / (float)(ballCount - 1)) / 2
+
+            x = Random.Range(-1 * floorTransform.localScale.x, floorTransform.localScale.x) / 2,
+            y = Random.Range(ballGridGroundOffset, ballGridMaxHeight),
+            z = Random.Range(-1 * floorTransform.localScale.z, floorTransform.localScale.z) / 2
         };
 
         ball.transform.position = ballPosition;
