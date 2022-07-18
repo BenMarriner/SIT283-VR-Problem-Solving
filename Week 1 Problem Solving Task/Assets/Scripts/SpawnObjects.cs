@@ -7,29 +7,36 @@ public class SpawnObjects : MonoBehaviour
     public GameObject prefab;
     public GameObject floor;
     public int ballCount;
-    public float ballHeight;
+    public float ballGridMaxHeight;
+    public float ballGridGroundOffset;
+    private GameObject[,,] balls;
+
+    private void EvaluatePosition(GameObject ball)
+    {
+        Transform floorTransform = floor.transform;
+        Vector3 ballPosition = new Vector3
+        {
+            x = Random.Range(-1 * floorTransform.localScale.x, floorTransform.localScale.x) / 2,
+            y = Random.Range(ballGridGroundOffset, ballGridMaxHeight),
+            z = Random.Range(-1 * floorTransform.localScale.z, floorTransform.localScale.z) / 2
+        };
+
+        ball.transform.position = ballPosition;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        balls = new GameObject[ballCount, ballCount, ballCount];
+
         for (int x = 0; x < ballCount; x++)
         {
             for (int y = 0; y < ballCount; y++)
             {
                 for (int z = 0; z < ballCount; z++)
                 {
-                    Transform floorTransform = floor.transform;
-                    Vector3 ballPosition = new Vector3
-                    {
-                        x = Mathf.Lerp(floorTransform.localScale.x * -1, floorTransform.localScale.x, x / (ballCount - 1)) / 2.0f,
-                        y = ballHeight * 2.0f * y,
-                        z = Mathf.Lerp(floorTransform.localScale.z * -1, floorTransform.localScale.z, z / (ballCount - 1)) / 2.0f
-                    };
-
-                    GameObject ball = Instantiate(prefab, ballPosition, Quaternion.identity);
-
-                    print(string.Format("X: {0}, Y: {1}, Z: {2}", x, y, z));
-                    print(string.Format("Coords: {0}", ballPosition));
+                    balls[x, y, z] = Instantiate(prefab);
+                    EvaluatePosition(balls[x, y, z]);
                 }
             }
         }
@@ -38,6 +45,6 @@ public class SpawnObjects : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
