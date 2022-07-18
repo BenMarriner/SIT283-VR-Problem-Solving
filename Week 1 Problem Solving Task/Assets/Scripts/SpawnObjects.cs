@@ -7,7 +7,6 @@ public class SpawnObjects : MonoBehaviour
     public GameObject prefab;
     public GameObject floor;
     public int ballCount;
-    // public int size;
     public float ballHeight;
 
     // Start is called before the first frame update
@@ -22,16 +21,15 @@ public class SpawnObjects : MonoBehaviour
                     Transform floorTransform = floor.transform;
                     Vector3 ballPosition = new Vector3
                     {
-                        x = Mathf.Lerp(floorTransform.localScale.x * -1, floorTransform.localScale.x, x / (ballCount - 1)) / 2,
-                        y = ballHeight * 2 * y,
-                        z = Mathf.Lerp(floorTransform.localScale.z * -1, floorTransform.localScale.z, z / (ballCount - 1)) / 2
+                        x = Mathf.Lerp(floorTransform.localScale.x * -1, floorTransform.localScale.x, x / (ballCount - 1)) / 2.0f,
+                        y = ballHeight * 2.0f * y,
+                        z = Mathf.Lerp(floorTransform.localScale.z * -1, floorTransform.localScale.z, z / (ballCount - 1)) / 2.0f
                     };
 
-                    GameObject ball = Instantiate(prefab, ballPosition, Quaternion.identity);   
+                    GameObject ball = Instantiate(prefab, ballPosition, Quaternion.identity);
 
-                    print(x);
-                    print(y);
-                    print(z);
+                    print(string.Format("X: {0}, Y: {1}, Z: {2}", x, y, z));
+                    print(string.Format("Coords: {0}", ballPosition));
                 }
             }
         }
