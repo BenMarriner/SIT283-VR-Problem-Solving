@@ -62,15 +62,20 @@ public class SphereMover : MonoBehaviour
             sphere.transform.parent = transform;
 
             Color sphereColour = Random.ColorHSV(0, 1, 1, 1, 1, 1);
-            sphere.gameObject.GetComponent<Renderer>().material.SetColor("_Color", sphereColour);
-            sphere.gameObject.GetComponent<Renderer>().material.SetColor("_EmissionColor", sphereColour);
-
+            sphere.GetComponent<Renderer>()
+                .material.SetColor("_Color", sphereColour);
+            sphere.GetComponent<Renderer>()
+                .material.SetColor("_EmissionColor", sphereColour);
         }
+
+        radiusSphere = Instantiate(radiusSphere);
     }
 
     // Update is called once per frame
     void Update()
     {
+        moveSpeed = Mathf.Clamp(moveSpeed, 0, float.PositiveInfinity);
+
         foreach (var sphere in spheres)
         {
             Vector3 currentPos = sphere.gameObject.transform.position;
@@ -80,14 +85,9 @@ public class SphereMover : MonoBehaviour
 
             sphere.gameObject.transform.position = currentPos;
             sphere.gameObject.transform.localScale = FloatToVector3(sphereScale);
-
-            Debug.Log($"Current Position: {currentPos}");
-            Debug.Log($"Target Position: {sphere.targetPos}");
         }
 
         radiusSphere.SetActive(showRadiusSphere);
         radiusSphere.transform.localScale = FloatToVector3(movementRadius);
     }
-
-    
 }
