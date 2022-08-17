@@ -32,5 +32,21 @@ namespace Valve.VR
                 return SteamVR_Actions.default_Pose;
             }
         }
+        
+        public virtual SteamVR_Action_Boolean Move
+        {
+            get
+            {
+                return SteamVR_Actions.default_Move;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean Teleport
+        {
+            get
+            {
+                return SteamVR_Actions.default_Teleport;
+            }
+        }
     }
 }

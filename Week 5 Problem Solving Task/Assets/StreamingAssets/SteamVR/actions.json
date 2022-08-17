@@ -7,6 +7,14 @@
     {
       "name": "/actions/default/in/Pose",
       "type": "pose"
+    },
+    {
+      "name": "/actions/default/in/Move",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/Teleport",
+      "type": "boolean"
     }
   ],
   "action_sets": [

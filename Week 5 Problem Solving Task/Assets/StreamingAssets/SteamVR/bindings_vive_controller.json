@@ -12,16 +12,7 @@
       },
       "/actions/default" : {
          "chords" : [],
-         "haptics" : [
-            {
-               "output" : "/actions/default/out/haptic",
-               "path" : "/user/hand/left/output/haptic"
-            },
-            {
-               "output" : "/actions/default/out/haptic",
-               "path" : "/user/hand/right/output/haptic"
-            }
-         ],
+         "haptics" : [],
          "poses" : [
             {
                "output" : "/actions/default/in/pose",
@@ -32,16 +23,7 @@
                "path" : "/user/hand/right/pose/raw"
             }
          ],
-         "skeleton" : [
-            {
-               "output" : "/actions/default/in/skeletonlefthand",
-               "path" : "/user/hand/left/input/skeleton/left"
-            },
-            {
-               "output" : "/actions/default/in/skeletonrighthand",
-               "path" : "/user/hand/right/input/skeleton/right"
-            }
-         ],
+         "skeleton" : [],
          "sources" : [
             {
                "inputs" : {
@@ -60,6 +42,30 @@
                },
                "mode" : "trigger",
                "path" : "/user/hand/right/input/trigger"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/teleport"
+                  },
+                  "touch" : {
+                     "output" : "/actions/default/in/move"
+                  }
+               },
+               "mode" : "trackpad",
+               "path" : "/user/hand/left/input/trackpad"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/teleport"
+                  },
+                  "touch" : {
+                     "output" : "/actions/default/in/move"
+                  }
+               },
+               "mode" : "trackpad",
+               "path" : "/user/hand/right/input/trackpad"
             }
          ]
       },

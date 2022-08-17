@@ -11,8 +11,8 @@ public class LaserPointer : MonoBehaviour
     public GameObject laserPrefab;
     private GameObject laser;
     private Transform laserTransform;
-    private Vector3 hitPoint;
-    private GameObject hitObject;
+    public Vector3 hitPoint;
+    public GameObject hitObject;
 
     private void ShowLaser(RaycastHit hit)
     {
