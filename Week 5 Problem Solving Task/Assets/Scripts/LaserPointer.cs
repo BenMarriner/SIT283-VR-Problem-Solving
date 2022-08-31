@@ -5,26 +5,59 @@ using Valve.VR;
 
 public class LaserPointer : MonoBehaviour
 {
-    public SteamVR_Input_Sources handType;
-    public SteamVR_Behaviour_Pose controllerPose;
-    public SteamVR_Action_Boolean laserAction;
-    public GameObject laserPrefab;
     private GameObject laser;
     private Transform laserTransform;
-    public Vector3 hitPoint;
-    public GameObject hitObject;
+    private Vector3 hitPoint;
+    private GameObject hitObject;
+    private float hitDistance;
 
-    private void ShowLaser(RaycastHit hit)
+    public GameObject laserPrefab;
+    [HideInInspector]
+    public Vector3 startPos;
+    [HideInInspector]
+    public bool laserEnabled = false;
+
+    public GameObject HitObject { get { return hitObject; } }
+    public float HitDistance { get { return hitDistance; } }
+    public Vector3 HitPoint { get { return hitPoint; } }
+
+    private void ShowLaser()
     {
-        laser.SetActive(true);
-        laserTransform.position = Vector3.Lerp(controllerPose.transform.position, hitPoint, 0.5f);
-        laserTransform.LookAt(hitPoint);
-        laserTransform.localScale = new Vector3
-        (
-            laserTransform.localScale.x,
-            laserTransform.localScale.y,
-            hit.distance
-        );
+        RaycastHit hit;
+        bool hitDetected = LaserRayCast(out hit);
+
+        laser.SetActive(hitDetected);
+
+        if (hitDetected)
+        {
+            startPos = transform.position;
+            laserTransform.position = Vector3.Lerp(startPos, hitPoint, 0.5f);
+            laserTransform.LookAt(hitPoint);
+            laserTransform.localScale = new Vector3
+            (
+                laserTransform.localScale.x,
+                laserTransform.localScale.y,
+                hit.distance
+            );
+        }
+    }
+
+    private bool LaserRayCast(out RaycastHit hitRay)
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(startPos, transform.forward, out hit, 100))
+        {
+            hitRay = hit;
+            hitDistance = hit.distance;
+            hitPoint = hit.point;
+            hitObject = hit.transform.gameObject;
+
+            return true;
+        }
+
+        hitRay = hit;
+        return false;
     }
 
     // Start is called before the first frame update
@@ -37,24 +70,7 @@ public class LaserPointer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (laserAction.GetState(handType))
-        {
-            RaycastHit hit;
-
-            if (Physics.Raycast(controllerPose.transform.position, transform.forward, out hit, 100))
-            {
-                hitPoint = hit.point;
-                hitObject = hit.transform.gameObject;
-                InteractableObject interactableObject = hitObject.GetComponent<InteractableObject>();
-                if (interactableObject)
-                {
-                    interactableObject.Interact();
-                }
-                ShowLaser(hit);
-            }
-
-            print("Firing laser");
-        }
+        if (laserEnabled) ShowLaser();
         else laser.SetActive(false);
     }
 }

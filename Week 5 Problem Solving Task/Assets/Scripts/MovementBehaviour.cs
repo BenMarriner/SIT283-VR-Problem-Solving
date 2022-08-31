@@ -8,8 +8,8 @@ public abstract class MovementBehaviour : MonoBehaviour
     public SteamVR_Input_Sources handType;
     public SteamVR_Action_Boolean moveAction;
     protected Vector3 moveDirection;
-    private GameObject player;
-    private GameObject cameraRig;
+    protected GameObject player;
+    protected GameObject cameraRig;
 
     [HideInInspector]
     public float moveSpeed;
@@ -27,7 +27,7 @@ public abstract class MovementBehaviour : MonoBehaviour
         if (movementTypeEnabled && moveAction.GetState(handType)) Move();
     }
 
-    private void Move()
+    protected virtual void Move()
     {
         player.transform.position += moveDirection * moveSpeed * Time.deltaTime;
     }

@@ -13,11 +13,10 @@ public class MovementBehaviourManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        
         switch (movementType)
         {
             case MovementTypes.Teleport:
+                currentMovementBehaviour = GetComponent<Teleport>();
                 break;
             case MovementTypes.MoveWithHMDDirection:
                 currentMovementBehaviour = GetComponent<MoveWithHMDDirection>();
