@@ -15,6 +15,10 @@
     {
       "name": "/actions/default/in/Teleport",
       "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/Grab",
+      "type": "boolean"
     }
   ],
   "action_sets": [

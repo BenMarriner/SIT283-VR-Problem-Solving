@@ -48,5 +48,13 @@ namespace Valve.VR
                 return SteamVR_Actions.default_Teleport;
             }
         }
+        
+        public virtual SteamVR_Action_Boolean Grab
+        {
+            get
+            {
+                return SteamVR_Actions.default_Grab;
+            }
+        }
     }
 }
