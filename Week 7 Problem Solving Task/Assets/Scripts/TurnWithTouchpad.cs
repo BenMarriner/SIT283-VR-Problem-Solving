@@ -9,12 +9,12 @@ public class TurnWithTouchpad : MonoBehaviour
     public SteamVR_Input_Sources handType;
     public float rotationSpeed;
 
-    private Quaternion playerRotation;
+    private Transform playerTransform;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerRotation = transform.root.transform.rotation;
+        playerTransform = transform.root.transform;
     }
 
     // Update is called once per frame
@@ -25,14 +25,6 @@ public class TurnWithTouchpad : MonoBehaviour
 
     void Rotate(Vector2 direction)
     {
-        Quaternion newRotation = new Quaternion()
-        {
-            x = playerRotation.x,
-            y = playerRotation.y + direction.x * rotationSpeed * Time.deltaTime,
-            z = playerRotation.z
-        };
-        playerRotation = newRotation;
-        print(newRotation);
-        print(playerRotation);
+        playerTransform.Rotate(Vector3.up * direction.x * rotationSpeed * Time.deltaTime);
     }
 }
