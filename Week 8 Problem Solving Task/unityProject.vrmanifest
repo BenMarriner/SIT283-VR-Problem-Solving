@@ -1,0 +1,16 @@
+{
+  "source": "Unity",
+  "applications": [
+    {
+      "app_key": "application.generated.unity.week5problemsolvingtask.exe",
+      "launch_type": "url",
+      "url": "steam://launch/",
+      "action_manifest_path": "D:\\Game Engines\\Unity Projects\\SIT283-VR-Problem-Solving\\Week 8 Problem Solving Task\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "strings": {
+        "en_us": {
+          "name": "Week 5 Problem Solving Task [Testing]"
+        }
+      }
+    }
+  ]
+}
