@@ -6,7 +6,6 @@ public class PaintBucket : MonoBehaviour
 {
     public Color paintColour = Color.green;
     
-    GameObject bucket;
     GameObject paint;
 
     Material bucketColourMaterial;
@@ -17,28 +16,22 @@ public class PaintBucket : MonoBehaviour
     {
         Configure();
         SetBucketPaintColour(paintColour);
+        Physics.IgnoreCollision(GameObject.Find("Player").GetComponent<Collider>(), GetComponent<Collider>());
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        print(bucket);
-    }
-
-    private void OnValidate()
-    {
-        Configure();
-        SetBucketPaintColour(paintColour);
+        
     }
 
     private void Configure()
     {
-        bucket = gameObject.transform.Find("Bucket").gameObject;
-        paint = bucket.transform.Find("paint").gameObject;
+        paint = transform.Find("paint").gameObject;
 
-        bucketColourMaterial = bucket.GetComponent<MeshRenderer>().sharedMaterials[1];
-        paintMaterial = paint.GetComponent<MeshRenderer>().sharedMaterials[0];
+        bucketColourMaterial = GetComponent<MeshRenderer>().materials[1];
+        paintMaterial = paint.GetComponent<MeshRenderer>().materials[0];
     }
 
     public void SetBucketPaintColour(Color colour)
