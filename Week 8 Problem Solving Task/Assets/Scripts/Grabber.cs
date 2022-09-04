@@ -22,8 +22,7 @@ public class Grabber : MonoBehaviour
     {
         if (!grabberGrabTransform)
         {
-            grabberGrabTransform.position = Vector3.zero;
-            grabberGrabTransform.rotation = Quaternion.identity;
+            grabberGrabTransform = transform;
         }
 
         objectDetector = GetComponent<Collider>();

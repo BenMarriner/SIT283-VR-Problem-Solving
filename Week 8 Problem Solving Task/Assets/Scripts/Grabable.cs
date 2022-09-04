@@ -55,6 +55,7 @@ public class Grabable : MonoBehaviour
     {
         IsObjectBeingHeld = false;
         GetComponent<Rigidbody>().isKinematic = false;
-        grabableGrabTransform.parent = null;
+        if (UsePreferredGrabbingPoint) grabableGrabTransform.parent = null;
+        else transform.parent = null;
     }
 }
