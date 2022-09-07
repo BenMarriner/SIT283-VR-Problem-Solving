@@ -17,16 +17,21 @@ public class ChasingFoodState : FishState
         if (!fish.closestNearbyPredatorFish.Equals(default(FishInfo)))
         {
             fish.SwitchState(FishStates.FleePredators);
-            return;
         }
-
-        if (fish.otherCollidingFish == fish.closestNearbyFoodFish.fish)
+        else if (!fish.closestNearbyFoodFish.Equals(default(FishInfo)))
         {
-            fish.SwitchState(FishStates.EatFood);
-            return;
+            if (fish.otherCollidingFish)
+            {
+                fish.SwitchState(FishStates.EatFood);
+            }
         }
-
-        if (!fish.closestNearbyFoodFish.Equals(default(FishInfo))) fish.movement.SwimTowards(fish.closestNearbyFoodFish.fish);
-        else fish.SwitchState(FishStates.LookForFood);
+        else if (!fish.closestNearbyFoodFish.Equals(default(FishInfo)))
+        {
+            fish.movement.SwimTowards(fish.closestNearbyFoodFish.fish);
+        }
+        else
+        {
+            fish.SwitchState(FishStates.LookForFood);
+        }
     }
 }

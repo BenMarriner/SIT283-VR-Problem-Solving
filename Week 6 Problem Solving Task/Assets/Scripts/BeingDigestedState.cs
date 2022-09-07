@@ -11,10 +11,12 @@ public class BeingDigested : FishState
     public override void EnterState(FishStateManager fish)
     {
         fish.movement.canSwim = false;
+        fish.movement.isFrozen = true;
     }
 
     public override void UpdateState(FishStateManager fish)
     {
-        if (fish.fishSize == 0) Object.Destroy(fish.gameObject);
+        if (fish.fishSize <= 0) Object.Destroy(fish.gameObject);
+        Debug.Log(fish.transform.localScale);
     }
 }

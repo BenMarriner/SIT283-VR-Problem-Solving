@@ -4,6 +4,7 @@ using UnityEngine;
 public class LookForFoodState : FishState
 {
 
+
     public override void EnterState(FishStateManager fish)
     {
 
@@ -19,13 +20,10 @@ public class LookForFoodState : FishState
         if (!fish.closestNearbyPredatorFish.Equals(default(FishInfo)))
         {
             fish.SwitchState(FishStates.FleePredators);
-            return;
         }
-
-        if (!fish.closestNearbyFoodFish.Equals(default(FishInfo)))
+        else if (!fish.closestNearbyFoodFish.Equals(default(FishInfo)))
         {
             fish.SwitchState(FishStates.ChaseFood);
-            return;
         }
 
         fish.movement.SwimRandom();

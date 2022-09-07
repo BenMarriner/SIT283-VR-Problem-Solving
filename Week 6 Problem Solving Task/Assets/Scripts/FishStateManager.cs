@@ -35,14 +35,17 @@ public struct FishInfo
 public class FishStateManager : MonoBehaviour
 {
     public float fishSize = 1.0f;
+    public Vector3 minBounds, maxBounds;
     public bool debugLists = false;
+    public float swimSpeed;
     public FishStates currentStateEnum { get; private set; }
 
     [HideInInspector]
     public List<FishInfo> food, predators;
     [HideInInspector]
     public MovementController movement;
-    public float searchRadius = 10.0f;
+    [HideInInspector]
+    public float searchRadius = 100.0f;
     [HideInInspector]
     public int fishID;
     [HideInInspector]
@@ -52,7 +55,8 @@ public class FishStateManager : MonoBehaviour
     [HideInInspector]
     public GameObject otherCollidingFish;
     [HideInInspector]
-    public const float digestionRate = 0.1f;
+    public readonly float digestionRate = 10.0f;
+
 
     private FishState[] _states =
     {
@@ -72,7 +76,9 @@ public class FishStateManager : MonoBehaviour
         predators = new List<FishInfo>();
         movement = GetComponent<MovementController>();
 
-        transform.localScale = Vector3.one * fishSize;
+        movement.baseSpeed = swimSpeed;
+        movement.minBounds = minBounds;
+        movement.maxBounds = maxBounds;
 
         // Enter looking for food state to start
         SwitchState(FishStates.LookForFood);
@@ -82,14 +88,15 @@ public class FishStateManager : MonoBehaviour
     void Update()
     {
         // Clean up fish that are out of the search radius
-        food.RemoveAll(fish => fish.distanceToTarget > searchRadius);
-        predators.RemoveAll(fish => fish.distanceToTarget > searchRadius);
+        food.RemoveAll(fish => Vector3.Distance(transform.position, fish.position) > searchRadius);
+        predators.RemoveAll(fish => Vector3.Distance(transform.position, fish.position) > searchRadius);
 
         //foreach (var fish in food)
         //    if (fish.distanceToTarget > searchRadius) food.Remove(fish);
         //foreach (var fish in predators)
         //    if (fish.distanceToTarget > searchRadius) predators.Remove(fish);
 
+        transform.localScale = Vector3.one * fishSize;
         currentState.UpdateState(this);
 
         if (debugLists)
@@ -103,11 +110,11 @@ public class FishStateManager : MonoBehaviour
             Debug.Log($"{gameObject.name}, Predators seen: {predatorsListDebugString}");
         }
 
+        Debug.Log($"{gameObject.name}, State: {currentStateEnum}");
+
         var stateCanvas = transform.Find("Canvas");
         var stateText = stateCanvas.transform.Find("StateText");
         stateText.GetComponent<Text>().text = currentStateEnum.ToString();
-
-        Debug.Log(searchRadius);
     }
 
     private void OnCollisionEnter(Collision collision)
