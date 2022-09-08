@@ -18,16 +18,23 @@ public class ChasingFoodState : FishState
         {
             fish.SwitchState(FishStates.FleePredators);
         }
-        else if (!fish.closestNearbyFoodFish.Equals(default(FishInfo)))
+        else if (!fish.closestNearbyFoodFish.Equals(default(FishInfo))) // Is there a closest food fish nearby?
         {
-            if (fish.otherCollidingFish)
+            if (fish.closestNearbyFoodFish.fish) // Is the fish still in the world?
             {
-                fish.SwitchState(FishStates.EatFood);
+                if (fish.otherCollidingFish == fish.closestNearbyFoodFish.fish) // Is this fish touching the other fish?
+                {
+                    fish.SwitchState(FishStates.EatFood);
+                }
+                else
+                {
+                    fish.movement.SwimTowards(fish.closestNearbyFoodFish.fish);
+                }
             }
-        }
-        else if (!fish.closestNearbyFoodFish.Equals(default(FishInfo)))
-        {
-            fish.movement.SwimTowards(fish.closestNearbyFoodFish.fish);
+            else
+            {
+                fish.SwitchState(FishStates.LookForFood);
+            }
         }
         else
         {

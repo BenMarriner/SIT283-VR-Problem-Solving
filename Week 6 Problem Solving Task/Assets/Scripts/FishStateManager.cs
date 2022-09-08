@@ -36,25 +36,18 @@ public class FishStateManager : MonoBehaviour
 {
     public float fishSize = 1.0f;
     public Vector3 minBounds, maxBounds;
-    public bool debugLists = false;
     public float swimSpeed;
+    public bool debugLists = false;
+    public bool debugState = false;
     public FishStates currentStateEnum { get; private set; }
 
-    [HideInInspector]
     public List<FishInfo> food, predators;
-    [HideInInspector]
     public MovementController movement;
-    [HideInInspector]
     public float searchRadius = 100.0f;
-    [HideInInspector]
     public int fishID;
-    [HideInInspector]
     public FishInfo closestNearbyFoodFish;
-    [HideInInspector]
     public FishInfo closestNearbyPredatorFish;
-    [HideInInspector]
     public GameObject otherCollidingFish;
-    [HideInInspector]
     public readonly float digestionRate = 10.0f;
 
 
@@ -91,6 +84,21 @@ public class FishStateManager : MonoBehaviour
         food.RemoveAll(fish => Vector3.Distance(transform.position, fish.position) > searchRadius);
         predators.RemoveAll(fish => Vector3.Distance(transform.position, fish.position) > searchRadius);
 
+        // Clean up closest invalidated fish (i.e.: Fish that have been fully digested and removed from the world)
+        if (!closestNearbyFoodFish.fish)        closestNearbyFoodFish = default(FishInfo);
+        if (!closestNearbyPredatorFish.fish)    closestNearbyPredatorFish = default(FishInfo);
+
+        // Extend search radius to maintain uniformity with fish size
+        searchRadius = fishSize * 3.0f;
+
+        transform.localScale = new Vector3()
+        {
+            x = Mathf.Abs(transform.localScale.x),
+            y = Mathf.Abs(transform.localScale.y),
+            z = Mathf.Abs(transform.localScale.z)
+        };
+
+
         //foreach (var fish in food)
         //    if (fish.distanceToTarget > searchRadius) food.Remove(fish);
         //foreach (var fish in predators)
@@ -110,7 +118,7 @@ public class FishStateManager : MonoBehaviour
             Debug.Log($"{gameObject.name}, Predators seen: {predatorsListDebugString}");
         }
 
-        Debug.Log($"{gameObject.name}, State: {currentStateEnum}");
+        if (debugState) Debug.Log($"{gameObject.name}, State: {currentStateEnum}");
 
         var stateCanvas = transform.Find("Canvas");
         var stateText = stateCanvas.transform.Find("StateText");

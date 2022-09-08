@@ -6,12 +6,9 @@ public class MovementController : MonoBehaviour
     public float baseSpeed = 10;
     public float speedMultiplier = 10;
 
-    [HideInInspector]
     public bool canSwim = true;
-    [HideInInspector]
     public bool isFrozen = false;
-    [HideInInspector]
-    public Vector3 minBounds = Vector3.zero, maxBounds = new Vector3(10, 10, 10);
+    public Vector3 minBounds, maxBounds;
 
     private Rigidbody rb;
     private Vector3 randomisedTargetLocation;
@@ -21,13 +18,6 @@ public class MovementController : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        
-        randomisedTargetLocation = new Vector3()
-        {
-            x = Random.Range(minBounds.x, maxBounds.x),
-            y = Random.Range(minBounds.y, maxBounds.y),
-            z = Random.Range(minBounds.z, maxBounds.z)
-        };
     }
 
     private void FixedUpdate()
@@ -37,14 +27,13 @@ public class MovementController : MonoBehaviour
 
         //if (swimTowardsTarget) SwimTowards(targetLocation, finalSpeed);
         //else SwimAway(targetLocation, finalSpeed);
-
-        if (isFrozen) rb.constraints = RigidbodyConstraints.FreezeAll;
-        else rb.constraints = RigidbodyConstraints.None;
+        
+        rb.constraints = isFrozen ? RigidbodyConstraints.FreezeAll : RigidbodyConstraints.None;
     }
 
     public void SwimRandom()
     {
-        if (IsAlmostEqual(randomisedTargetLocation, transform.position, 1.0f))
+        if (randomisedTargetLocation == default(Vector3) || IsAlmostEqual(randomisedTargetLocation, transform.position, 1.0f))
         {
             randomisedTargetLocation = new Vector3()
             {
@@ -55,6 +44,7 @@ public class MovementController : MonoBehaviour
         }
 
         SwimTowards(randomisedTargetLocation, finalSpeed);
+        Debug.Log($"{gameObject.name}: {randomisedTargetLocation}");
     }
 
     public void SwimTowards(GameObject targetObject)

@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 3310105724400760676}
   - component: {fileID: 3310105724400760675}
   - component: {fileID: 3310105724400760674}
-  - component: {fileID: 3310105724400760677}
+  - component: {fileID: 2535673742356342487}
   - component: {fileID: 3310105724400760686}
   - component: {fileID: 3310105724400760673}
   - component: {fileID: 3310105724400760672}
@@ -223,7 +223,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3310105724400760679}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &3310105724400760674
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -265,8 +265,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &3310105724400760677
-CapsuleCollider:
+--- !u!64 &2535673742356342487
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -275,10 +275,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &3310105724400760686
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -310,10 +310,11 @@ MonoBehaviour:
   fishSize: 1
   minBounds: {x: 0, y: 0, z: 0}
   maxBounds: {x: 0, y: 0, z: 0}
-  debugLists: 1
   swimSpeed: 0
+  debugLists: 0
+  debugState: 0
   movement: {fileID: 0}
-  searchRadius: 20
+  searchRadius: 100
   fishID: 0
   otherCollidingFish: {fileID: 0}
 --- !u!114 &3310105724400760672
@@ -329,9 +330,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 0}
-  baseSpeed: 1
-  speedMultiplier: 30
+  baseSpeed: 10
+  speedMultiplier: 50
   canSwim: 1
   isFrozen: 0
   minBounds: {x: 0, y: 0, z: 0}
-  maxBounds: {x: 10, y: 10, z: 10}
+  maxBounds: {x: 0, y: 0, z: 0}

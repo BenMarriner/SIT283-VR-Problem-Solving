@@ -21,12 +21,14 @@ public class LookForFoodState : FishState
         {
             fish.SwitchState(FishStates.FleePredators);
         }
-        else if (!fish.closestNearbyFoodFish.Equals(default(FishInfo)))
+        else if (!fish.closestNearbyFoodFish.Equals(default(FishInfo)) && fish.closestNearbyFoodFish.fish)
         {
             fish.SwitchState(FishStates.ChaseFood);
         }
-
-        fish.movement.SwimRandom();
+        else
+        {
+            fish.movement.SwimRandom();
+        }
     }
 
 }

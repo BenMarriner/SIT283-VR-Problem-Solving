@@ -153,9 +153,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 3310105724400760679, guid: 92af67d1f31829f4b810bd30805e7645, type: 3}
-  objectCount: 10
-  minSpawnArea: {x: -100, y: -100, z: -100}
-  maxSpawnArea: {x: 100, y: 100, z: 100}
+  objectCount: 50
+  minSpawnArea: {x: -500, y: -500, z: -500}
+  maxSpawnArea: {x: 500, y: 500, z: 500}
   minFishSize: 1
   maxFishSize: 20
   minSwimSpeed: 10
@@ -168,7 +168,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 296431687}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.027387, y: 3.8594558, z: -28.50585}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

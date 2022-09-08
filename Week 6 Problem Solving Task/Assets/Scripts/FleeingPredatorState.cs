@@ -12,13 +12,20 @@ public class FleeingPredatorState : FishState
         FishRoutines.EvaluateSurroundingFish(fish);
         FishRoutines.GetClosestPredator(fish);
 
-        if (fish.otherCollidingFish == fish.closestNearbyPredatorFish.fish)
+        if (!fish.closestNearbyPredatorFish.Equals(default(FishInfo)))
         {
-            fish.SwitchState(FishStates.BeDigested);
-            return;
+            if (fish.otherCollidingFish == fish.closestNearbyPredatorFish.fish)
+            {
+                fish.SwitchState(FishStates.BeDigested);
+            }
+            else
+            {
+                fish.movement.SwimAway(fish.closestNearbyPredatorFish.fish);
+            }
         }
-
-        if (!fish.closestNearbyPredatorFish.Equals(default(FishInfo))) fish.movement.SwimAway(fish.closestNearbyPredatorFish.fish);
-        else fish.SwitchState(FishStates.LookForFood);
+        else
+        {
+            fish.SwitchState(FishStates.LookForFood);
+        }
     }
 }

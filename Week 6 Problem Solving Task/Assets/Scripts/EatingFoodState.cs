@@ -16,11 +16,11 @@ public class EatingFoodState : FishState
         FishRoutines.GetClosestFood(fish);
 
         // Fish will prioritise their search for predators over their prey to simulate their urge to survive
-        if (!fish.closestNearbyPredatorFish.Equals(default(FishInfo)))
-        {
-            fish.SwitchState(FishStates.FleePredators);
-        }
-        else if (otherFish)
+        //if (!fish.closestNearbyPredatorFish.Equals(default(FishInfo)))
+        //{
+        //    fish.SwitchState(FishStates.FleePredators);
+        //}
+        if (otherFish)
         {
             if (otherFish.TryGetComponent<FishStateManager>(out var otherFishStateManager))
             {

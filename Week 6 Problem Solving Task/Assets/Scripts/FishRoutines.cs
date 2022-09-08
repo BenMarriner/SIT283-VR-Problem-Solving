@@ -50,13 +50,22 @@ public static class FishRoutines
         // Get closest predator
         if (fish.predators.Count > 0)
         {
-            FishInfo closestFish = fish.predators[0];
+            FishInfo closestFish;
 
-            foreach (var fishInfo in fish.predators)
+            if (fish.otherCollidingFish)
             {
-                if (fishInfo.distanceToTarget < closestFish.distanceToTarget)
+                closestFish = fish.predators.Find(otherFish => fish.otherCollidingFish.GetComponent<FishStateManager>().fishID == otherFish.fishID);
+            }
+            else
+            {
+                closestFish = fish.predators[0];
+
+                foreach (var fishInfo in fish.predators)
                 {
-                    closestFish = fishInfo;
+                    if (fishInfo.distanceToTarget < closestFish.distanceToTarget)
+                    {
+                        closestFish = fishInfo;
+                    }
                 }
             }
 
@@ -69,13 +78,22 @@ public static class FishRoutines
         // Get closest food
         if (fish.food.Count > 0)
         {
-            FishInfo closestFish = fish.food[0];
+            FishInfo closestFish;
 
-            foreach (var fishInfo in fish.food)
+            if (fish.otherCollidingFish)
             {
-                if (fishInfo.distanceToTarget < closestFish.distanceToTarget)
+                closestFish = fish.food.Find(otherFish => fish.otherCollidingFish.GetComponent<FishStateManager>().fishID == otherFish.fishID);
+            }
+            else
+            {
+                closestFish = fish.food[0];
+
+                foreach (var fishInfo in fish.food)
                 {
-                    closestFish = fishInfo;
+                    if (fishInfo.distanceToTarget < closestFish.distanceToTarget)
+                    {
+                        closestFish = fishInfo;
+                    }
                 }
             }
 
