@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5055733375850129828}
+  - component: {fileID: 1213564206039672488}
   m_Layer: 0
-  m_Name: Floor
+  m_Name: Apartment Block Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,3 +31,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1213564206039672488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3179019002199020904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 396d573ab6b522b49ae5ad9d131c0fb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pieces: []
+  bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  corridorFloorPrefab: {fileID: 941646495547339993, guid: 1973f46ab5ecbb545b7c01ec01e94f0d, type: 3}
+  gridSize: {x: 2, y: 5}
+  gridUnitSize: {x: 5, y: 5}
+  apartmentPrefab: {fileID: 4205075798672113208, guid: 65d621247ce774d48a2e38d946c7697b, type: 3}
+  numRows: 0
+  numApartmentsInRow: 0

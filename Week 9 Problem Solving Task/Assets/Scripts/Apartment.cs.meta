@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: b794fb84b56816542acdab769cc2ee2c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - floor1mPrefab: {fileID: 941646495547339993, guid: 1973f46ab5ecbb545b7c01ec01e94f0d, type: 3}
+  - floor2mPrefab: {fileID: 941646495547339993, guid: acedd178ded0dba46a341c1e10ca5c19, type: 3}
+  - wall1mPrefab: {fileID: 941646495547339993, guid: 453136ef6a927ca4dbf64b4c01dae4fd, type: 3}
+  - wall2mPrefab: {fileID: 941646495547339993, guid: d9fddbcc865b3a64f8662fbd6fe5c941, type: 3}
+  - wall4mPrefab: {fileID: 941646495547339993, guid: b733081949c7fd84199db681bef42a56, type: 3}
+  - wallDoorway1mPrefab: {fileID: 941646495547339993, guid: f9cacd3e607260544a39023aec0260ce, type: 3}
+  - wallDoorway2mPrefab: {fileID: 941646495547339993, guid: abe27d2612e71a2419960231c4169f6a, type: 3}
+  - wallDoorway4mPrefab: {fileID: 941646495547339993, guid: 2ba929dc9ac7c6f4f91951c663162289, type: 3}
+  - wallWindow1mPrefab: {fileID: 941646495547339993, guid: aac3dab5b4051654687252382bd224d0, type: 3}
+  - wallWindow2mPrefab: {fileID: 941646495547339993, guid: 60ca9e02e48ad4f4e9591702bf2fcc8c, type: 3}
+  - wallWindow4mPrefab: {fileID: 941646495547339993, guid: 9c4d29b0ce67b8247a4cdd163c07b716, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

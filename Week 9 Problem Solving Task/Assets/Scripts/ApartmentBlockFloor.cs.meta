@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 396d573ab6b522b49ae5ad9d131c0fb5
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - apartmentPrefab: {fileID: 4205075798672113208, guid: 65d621247ce774d48a2e38d946c7697b, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

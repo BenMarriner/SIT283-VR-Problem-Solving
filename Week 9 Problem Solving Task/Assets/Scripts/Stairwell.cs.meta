@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: ebd3ca04f7fe831409847c2117dddccd
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - staircasePrefab: {fileID: 941646495547339993, guid: eb1bef765c248c444977a0831febbc07, type: 3}
+  - sideWallPrefab: {fileID: 941646495547339993, guid: 69ac8ee99eae97148a0ceae32b77a07d, type: 3}
+  - sideWallTopFloorPrefab: {fileID: 941646495547339993, guid: 411b0d2b7fc9ccb4aa4740851720d1f0, type: 3}
+  - backWallPrefab: {fileID: 941646495547339993, guid: 5a63698d92d24a04d85d566281f693a6, type: 3}
+  - backWallTopFloorPrefab: {fileID: 941646495547339993, guid: 551413dbbf2a579469bdc1cf876f0af8, type: 3}
+  - doorwayPrefab: {fileID: 941646495547339993, guid: d7df7eb4c36ea1e4f8e9a4b713688cf5, type: 3}
+  - doorWayTopFloorPrefab: {fileID: 941646495547339993, guid: 2cbcdfc77fc0efe4b8d3295c002ce233, type: 3}
+  - bottomFloorPrefab: {fileID: 941646495547339993, guid: 0a3ec1569b3e7904dbd5118c8ec0a242, type: 3}
+  - ceilingPrefab: {fileID: 941646495547339993, guid: da1bf49e37cc3ea4db7e156796f2f23b, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
