@@ -85,7 +85,12 @@ public abstract class Builder : MonoBehaviour
 
     public void SnapToObject(GameObject obj, Vector3 objSnapPoint, Vector3 otherObjSnapPoint, SnapAxes snapAxes = SnapAxes.All)
     {
-        Vector3 distance = otherObjSnapPoint - objSnapPoint;
+        SnapTo(obj, objSnapPoint, otherObjSnapPoint, snapAxes);
+    }
+
+    public void SnapTo(GameObject obj, Vector3 objSnapPoint, Vector3 location, SnapAxes snapAxes = SnapAxes.All)
+    {
+        Vector3 distance = location - objSnapPoint;
         SnapTo(obj, obj.transform.position + distance, snapAxes);
     }
 

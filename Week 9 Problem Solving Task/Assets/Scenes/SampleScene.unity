@@ -381,7 +381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1213564206039672488, guid: 95d068864804233448bf57d65b9e4e4b, type: 3}
       propertyPath: gridSize.x
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1213564206039672488, guid: 95d068864804233448bf57d65b9e4e4b, type: 3}
       propertyPath: gridSize.y

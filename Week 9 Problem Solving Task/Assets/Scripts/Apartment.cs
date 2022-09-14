@@ -15,6 +15,7 @@ public class Apartment : Builder
     public GameObject wallWindow4mPrefab;
 
     public Vector2 dimensions = new Vector2(5, 5);
+    public bool frontWallIsWindow = true;
 
     [HideInInspector]
     public GameObject floor;
@@ -61,7 +62,7 @@ public class Apartment : Builder
         RotateAroundSnapPoint(sideWalls[1], floorRightSnapPoint, Vector3.up, 90);
 
         // Front wall
-        frontWall = BuildWall(wallWindow1mPrefab, dimensions.x);
+        frontWall = BuildWall(frontWallIsWindow ? wallWindow1mPrefab : wall1mPrefab, dimensions.x);
         var frontWallSnapPoint = GetSnapPoint(frontWall, new Vector3(0, -1, 1));
 
         SnapToObject(frontWall, frontWallSnapPoint, floorFrontSnapPoint);
