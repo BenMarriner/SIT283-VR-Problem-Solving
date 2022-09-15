@@ -8,6 +8,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 {
     private const string _roomName = "room";
     public GameObject playerPrefab;
+    public GameObject localPlayer;
     
     // Start is called before the first frame update
     void Start()
@@ -43,11 +44,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             // Instantiate at one end of the table
             case 1:
-                PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0.0f, 0.0f, -0.6f), Quaternion.identity);
+                localPlayer = PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0.0f, 0.0f, -0.6f), Quaternion.identity);
                 break;
             // Instantiate at the opposite end of the table
             case 2:
-                PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0.0f, 0.0f, 0.6f), Quaternion.Euler(0.0f, 180.0f, 0.0f));
+                localPlayer = PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0.0f, 0.0f, 0.6f), Quaternion.Euler(0.0f, 180.0f, 0.0f));
                 break;
         }
 
