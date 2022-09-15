@@ -17,6 +17,12 @@ public class Grabber : MonoBehaviour
 
     public bool IsHoldingObject { get { return heldObject != null; } }
 
+    private void Awake()
+    {
+        collidingObjects = new List<GameObject>();
+        objectDetector = GetComponent<Collider>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,9 +30,6 @@ public class Grabber : MonoBehaviour
         {
             grabberGrabTransform = transform;
         }
-
-        objectDetector = GetComponent<Collider>();
-        collidingObjects = new List<GameObject>();
     }
 
     // Update is called once per frame
