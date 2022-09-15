@@ -4,111 +4,111 @@ using UnityEngine;
 
 public class Stairwell : Builder
 {
+    public enum WallType { Side, Back, Doorway }
+    
+    public GameObject floor;
+    public GameObject ceiling;
+    public GameObject leftWall;
+    public GameObject rightWall;
+    public GameObject frontWall;
+    public GameObject doorway;
+    public GameObject staircase;
+
+    public bool isBottomFloorStairwell;
+    public bool isTopFloorStairwell;
+
     public GameObject staircasePrefab;
     public GameObject sideWallPrefab;
     public GameObject sideWallTopFloorPrefab;
-    public GameObject backWallPrefab;
-    public GameObject backWallTopFloorPrefab;
+    public GameObject frontWallPrefab;
+    public GameObject frontWallTopFloorPrefab;
     public GameObject doorwayPrefab;
     public GameObject doorWayTopFloorPrefab;
     public GameObject bottomFloorPrefab;
     public GameObject ceilingPrefab;
 
-    public int numFloors;
-
-    public GameObject floor;
-    public GameObject[] leftSideWalls;
-    public GameObject[] rightSideWalls;
-    public GameObject[] backWalls;
-    public GameObject[] doorways;
-    public GameObject[] staircases;
-
-    public override void EnumeratePieces()
-    {
-        Pieces.Add(floor);
-        Pieces.AddRange(leftSideWalls);
-        Pieces.AddRange(rightSideWalls);
-        Pieces.AddRange(backWalls);
-        Pieces.AddRange(doorways);
-        Pieces.AddRange(staircases);
-    }
-
     // Build stairwell
     public override void Build()
     {
-        if (numFloors == 0 || numFloors == 1) return;
-
+        // Snap points
+        Vector3 centerSnapPoint = transform.position;
+        Vector3 leftSnapPoint = centerSnapPoint + Vector3.Scale(bottomFloorPrefab.GetComponent<MeshFilter>().sharedMesh.bounds.extents, new Vector3(-1, 0, 0));
+        Vector3 rightSnapPoint = centerSnapPoint + Vector3.Scale(bottomFloorPrefab.GetComponent<MeshFilter>().sharedMesh.bounds.extents, new Vector3(1, 0, 0));
+        Vector3 frontSnapPoint = centerSnapPoint + Vector3.Scale(bottomFloorPrefab.GetComponent<MeshFilter>().sharedMesh.bounds.extents, new Vector3(0, 0, 1));
+        Vector3 backSnapPoint = centerSnapPoint + Vector3.Scale(bottomFloorPrefab.GetComponent<MeshFilter>().sharedMesh.bounds.extents, new Vector3(0, 0, -1));
 
         // Floor
-        floor = PlaceObject(bottomFloorPrefab, transform.position);
-        Vector3 floorLeftSnapPoint = GetSnapPoint(floor, Vector3.left);
-        Vector3 floorRightSnapPoint = GetSnapPoint(floor, Vector3.right);
-        Vector3 floorForwardSnapPoint = GetSnapPoint(floor, Vector3.forward);
-        Vector3 floorBackSnapPoint = GetSnapPoint(floor, Vector3.back);
-        Vector3 floorCenterSnapPoint = GetSnapPoint(floor, Vector3.zero);
+        if (isBottomFloorStairwell) floor = PlaceObject(bottomFloorPrefab, transform.position);
 
-
-        // Side wall
-        Vector3 sideWallSnapPointDirection = Vector3.back;
-        int numSideWalls = numFloors % 2 == 0 ? numFloors : (numFloors + 1) / 2;
-
-        leftSideWalls = BuildSideWall(floorLeftSnapPoint, sideWallSnapPointDirection, numSideWalls, 90);
-        rightSideWalls = BuildSideWall(floorRightSnapPoint, sideWallSnapPointDirection, numSideWalls, -90);
+        // Side walls 
+        leftWall = BuildWall(WallType.Side, leftSnapPoint, -90);
+        var leftWallTopSnapPoint = GetSnapPoint(leftWall, new Vector3(0, 1, 0));
+        rightWall = BuildWall(WallType.Side, rightSnapPoint, 90);
 
         // Back wall
-        Vector3 backWallSnapPointDirection = Vector3.forward;
-        int numBackWalls = numFloors % 2 == 0 ? numFloors / 2 : (numFloors + 1) / 2;
-        backWalls = BuildBackWall(floorForwardSnapPoint, backWallSnapPointDirection, numBackWalls);
+        frontWall = BuildWall(WallType.Back, frontSnapPoint, 0);
 
-        // Doorways
-        Vector3 doorwaySnapPointDirection = Vector3.back;
-        int numDoorways = numFloors % 2 == 0 ? numFloors / 2 : (numFloors + 1) / 2;
-        doorways = BuildDoorway(floorBackSnapPoint, doorwaySnapPointDirection, numDoorways);
+        // Doorway
+        doorway = BuildWall(WallType.Doorway, backSnapPoint, 180);
 
         // Staircase
-        Vector3 staircaseSnapPointDirection = Vector3.zero;
-        int numStaircases = numFloors % 2 == 0 ? numFloors : (numFloors - 1);
-        staircases = BuildStaircase(floorCenterSnapPoint, staircaseSnapPointDirection, numStaircases, -90);
+        if (!isTopFloorStairwell)
+        {
+            staircase = PlaceObject(staircasePrefab);
+            RotateAroundSnapPoint(staircase, centerSnapPoint, Vector3.up, -90);
+            var staircaseSnapPoint = GetSnapPoint(staircase, new Vector3(0, -1, 0));
+            SnapToObject(staircase, staircaseSnapPoint, centerSnapPoint);
+        }
 
         // Ceiling
-        //var ceiling = PlaceObject(ceilingPrefab, transform.position);
+        if (isTopFloorStairwell)
+        {
+            ceiling = PlaceObject(ceilingPrefab, new Vector3(centerSnapPoint.x, 0, centerSnapPoint.z));
+            Vector3 ceilingSnapPoint = GetSnapPoint(ceiling, new Vector3(0, -1, 0));
+            SnapToObject(ceiling, ceilingSnapPoint, leftWallTopSnapPoint, SnapAxes.Y);
+        }
 
         // Enumerate pieces
         base.Build();
     }
 
-    public GameObject[] BuildSideWall(Vector3 snapPoint, Vector3 subPartSnapPointDirection, int numWalls, float rotation = 0)
+    public GameObject BuildWall(WallType type, Vector3 floorSnapPoint, float rotation)
     {
-        List<GameObject> walls = new List<GameObject>(); 
-        walls.AddRange(BuildPart(sideWallPrefab, snapPoint, subPartSnapPointDirection, numWalls - 1, rotation));
-        
-        if (numWalls % 2 != 0)
+        // Choose prefab based on type number
+        GameObject prefab;
+        switch (type)
         {
-            var topFloorWall = PlaceObject(sideWallTopFloorPrefab);
-            Vector3 sideWallTopFloorSnapPoint = GetSnapPoint(topFloorWall, Vector3.forward);
-            var prevWall = walls[walls.Count - 1];
-            Vector3 prevSWallSnapPoint = GetSnapPoint(prevWall, new Vector3(0, 1, 1));
-
-            //RotateAroundSnapPoint(topFloorWall, sideWallTopFloorSnapPoint, Vector3.up, rotation);
-            //SnapToObject(topFloorWall, sideWallTopFloorSnapPoint, prevSWallSnapPoint);
-
-            StackObjectNextTo(sideWallTopFloorPrefab, prevWall, Vector3.up);
+            case WallType.Side:
+                prefab = isBottomFloorStairwell || isTopFloorStairwell ? sideWallTopFloorPrefab : sideWallPrefab;
+                break;
+            case WallType.Back:
+                prefab = isBottomFloorStairwell || isTopFloorStairwell ? frontWallTopFloorPrefab : frontWallPrefab;
+                break;
+            case WallType.Doorway:
+                prefab = isBottomFloorStairwell || isTopFloorStairwell ? doorWayTopFloorPrefab : doorwayPrefab;
+                break;
+            default:
+                prefab = isBottomFloorStairwell || isTopFloorStairwell ? sideWallTopFloorPrefab : sideWallPrefab;
+                break;
         }
 
-        return walls.ToArray();
-    }
-    private GameObject[] BuildBackWall(Vector3 snapPoint, Vector3 subPartSnapPointDirection, int numWalls, float rotation = 0)
-    {
-        return BuildPart(backWallPrefab, snapPoint, subPartSnapPointDirection, numWalls, rotation);
+        // Place wall object and snap it to the floor
+        var wall = PlaceObject(prefab);
+        var wallSnapPoint = GetSnapPoint(wall, new Vector3(0, -1, 1));
+
+        RotateAroundSnapPoint(wall, wallSnapPoint, Vector3.up, rotation);
+        SnapToObject(wall, wallSnapPoint, floorSnapPoint);
+
+        return wall;
     }
 
-    private GameObject[] BuildStaircase(Vector3 snapPoint, Vector3 subPartSnapPointDirection, int numStaircases, float rotation = 0)
+    public override void EnumeratePieces()
     {
-        return BuildPart(staircasePrefab, snapPoint, subPartSnapPointDirection, numStaircases, rotation);
-    }
-
-    private GameObject[] BuildDoorway(Vector3 snapPoint, Vector3 subPartSnapPointDirection, int numDoorways, float rotation = 0)
-    {
-        return BuildPart(doorwayPrefab, snapPoint, subPartSnapPointDirection, numDoorways, rotation);
+        Pieces.Add(floor);
+        Pieces.Add(leftWall);
+        Pieces.Add(rightWall);
+        Pieces.Add(frontWall);
+        Pieces.Add(doorway);
+        Pieces.Add(staircase);
     }
 }

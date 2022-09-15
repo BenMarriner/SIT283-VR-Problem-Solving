@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 6efa9b6ac1f09b6489b76d7bba4b7985
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - ceiling: {instanceID: 0}
+  - floor: {instanceID: 0}
+  - frontWall: {instanceID: 0}
+  - backWall: {instanceID: 0}
+  - leftWall: {instanceID: 0}
+  - rightWall: {instanceID: 0}
+  - wallPrefab: {fileID: 941646495547339993, guid: 453136ef6a927ca4dbf64b4c01dae4fd, type: 3}
+  - wallWindowPrefab: {fileID: 941646495547339993, guid: aac3dab5b4051654687252382bd224d0, type: 3}
+  - wallDoorPrefab: {fileID: 941646495547339993, guid: f9cacd3e607260544a39023aec0260ce, type: 3}
+  - floorPrefab: {fileID: 941646495547339993, guid: 1973f46ab5ecbb545b7c01ec01e94f0d, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

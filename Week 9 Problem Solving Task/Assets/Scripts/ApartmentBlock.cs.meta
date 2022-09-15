@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: a5e9cd47cccf6cd48a66d70fc93c8da2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - apartmentBlockFloorPrefab: {fileID: 3179019002199020904, guid: 95d068864804233448bf57d65b9e4e4b, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

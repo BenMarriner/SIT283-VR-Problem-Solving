@@ -5,6 +5,8 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - apartmentPrefab: {fileID: 4205075798672113208, guid: 65d621247ce774d48a2e38d946c7697b, type: 3}
+  - corridorPrefab: {fileID: 1178378377982549514, guid: 2649dcf3f8ca5f9419adebd053bef9fd, type: 3}
+  - stairwellPrefab: {fileID: 4289131529212990686, guid: 9fd301e31bbc11e429e1fdb68e0143ec, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

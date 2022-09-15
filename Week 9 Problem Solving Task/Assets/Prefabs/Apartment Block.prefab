@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3564388706329717782}
+  - component: {fileID: 5786767890693233180}
   m_Layer: 0
   m_Name: Apartment Block
   m_TagString: Untagged
@@ -30,3 +31,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5786767890693233180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426284812202611166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e9cd47cccf6cd48a66d70fc93c8da2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  apartmentBlockFloorPrefab: {fileID: 3179019002199020904, guid: 95d068864804233448bf57d65b9e4e4b, type: 3}

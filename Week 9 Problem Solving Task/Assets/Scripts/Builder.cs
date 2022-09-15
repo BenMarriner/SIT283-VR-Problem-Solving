@@ -4,11 +4,13 @@ using UnityEngine;
 
 public abstract class Builder : MonoBehaviour
 {
-    private List<GameObject> pieces;
-    private Bounds bounds;
+    [HideInInspector]
+    private List<GameObject> pieces = new List<GameObject>();
+    [HideInInspector]
+    public Bounds bounds = new Bounds();
+    protected const float ceilingHeight = 2.8f;
 
     public List<GameObject> Pieces { get { return pieces; } }
-    public Bounds Bounds { get { return bounds; } }
     
     public enum SnapAxes
     {
@@ -17,8 +19,6 @@ public abstract class Builder : MonoBehaviour
     
     private void Awake()
     {
-        pieces = new List<GameObject>();
-        bounds = new Bounds();
         Build();
     }
 
@@ -35,10 +35,10 @@ public abstract class Builder : MonoBehaviour
         {
             // If piece has a builder script, use the bounds property from it instead
             if (piece.TryGetComponent<Builder>(out var pieceBuilderScript))
-                Bounds.Encapsulate(pieceBuilderScript.Bounds);
+                bounds.Encapsulate(pieceBuilderScript.bounds);
             // Otherwise, use bounds from individual meshes
             else
-                Bounds.Encapsulate(piece.GetComponent<MeshRenderer>().bounds);
+                bounds.Encapsulate(piece.GetComponent<MeshRenderer>().bounds);
         }
     }
 
@@ -79,7 +79,7 @@ public abstract class Builder : MonoBehaviour
             z = Mathf.Lerp(objBounds.min.z, objBounds.max.z, (direction.z + 1.0f) / 2.0f)
         };
 
-        snapPoint += obj.transform.position;
+        //snapPoint += obj.transform.position;
         return snapPoint;
     }
 

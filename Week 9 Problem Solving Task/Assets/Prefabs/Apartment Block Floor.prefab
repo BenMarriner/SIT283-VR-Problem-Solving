@@ -43,13 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 396d573ab6b522b49ae5ad9d131c0fb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pieces: []
-  bounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  corridorFloorPrefab: {fileID: 941646495547339993, guid: 1973f46ab5ecbb545b7c01ec01e94f0d, type: 3}
-  gridSize: {x: 2, y: 5}
-  gridUnitSize: {x: 5, y: 5}
   apartmentPrefab: {fileID: 4205075798672113208, guid: 65d621247ce774d48a2e38d946c7697b, type: 3}
-  numRows: 0
-  numApartmentsInRow: 0
+  corridorPrefab: {fileID: 1178378377982549514, guid: 2649dcf3f8ca5f9419adebd053bef9fd, type: 3}
+  stairwellPrefab: {fileID: 4289131529212990686, guid: 9fd301e31bbc11e429e1fdb68e0143ec, type: 3}
+  gridSize: {x: 2, y: 5}
+  gridUnitSize: 5
